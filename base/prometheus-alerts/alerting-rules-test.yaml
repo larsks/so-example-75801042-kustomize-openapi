@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: alerting-rules-test
+  namespace: my-namespace
+  labels:
+    app-id: MY-APP-ID
+    ms-id: my-ms-id
+spec:
+  groups:
+    - name: alerting-rules-test
+      interval: 60s
+      rules:
+        - alert: alert-testing
+          expr: absent(application:health_microservice{service="my-service"})
+          for: 10m
+          labels:
+            priority: "MAJOR"
+            mc_id: ""
+            event_id: "100"
+            namespace: "my-namespace"
+          annotations:
+            summary: >
+              Summary of test alert
+            description: >
+              Description of test alert

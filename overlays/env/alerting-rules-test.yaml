@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: alerting-rules-test
+  namespace: my-namespace
+spec:
+  groups:
+    - name: alerting-rules-test
+      interval: 60s
+      rules:
+        - alert: alert-testing-2
+          expr: absent(application:health_microservice{service="my-service"})
+          labels:
+            priority: "MINOR"

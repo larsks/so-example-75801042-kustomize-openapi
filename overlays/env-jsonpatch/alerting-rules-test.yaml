@@ -1,0 +1,7 @@
+- op: add
+  path: /spec/groups/0/rules/-
+  value:
+    alert: alert-testing-2
+    expr: absent(application:health_microservice{service="my-service"})
+    labels:
+      priority: "MINOR"
